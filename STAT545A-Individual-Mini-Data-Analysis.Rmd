@@ -2,12 +2,7 @@
 title: "STAT545A Individual Mini Data Analysis"
 author: "Sara Kowalski"
 date: "October 9, 2021"
-output: 
-  html_document:
-    toc: true
-    toc_depth: 4
-    toc_float: true
-    theme: journal
+output: github_document
 ---
 
 
