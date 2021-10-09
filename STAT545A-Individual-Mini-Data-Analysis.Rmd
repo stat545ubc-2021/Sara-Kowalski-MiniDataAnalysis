@@ -1,0 +1,250 @@
+---
+title: "STAT545A Individual Mini Data Analysis"
+author: "Sara Kowalski"
+date: "October 9, 2021"
+output: 
+  html_document:
+    toc: true
+    toc_depth: 5
+    toc_float: true
+    theme: sandstone
+    highlight: espresso
+---
+
+
+
+## Table of Contents
+1. Introduction
+
+2. Install and load packages
+    + 2.1 Install **datateachr**
+    + 2.2 Load **datateachr** and **tidyverse**
+    
+3. Task 1: Choosing a dataset
+    + 3.1 Choose 4 out of the 7 available datasets
+    + 3.2 Explore the 4 datasets
+        + 3.2.1 *vancouver_trees* 
+        + 3.2.2 *cancer_sample* 
+        + 3.2.3 *flow_sample*
+        + 3.2.4 *steam_games*
+    + 3.3 Narrowing it down to 2 datasets
+    + 3.4 Final decision: choose a dataset
+    
+4. Task 2: Exploring the dataset
+    + 4.1 Diving deeper into the data 
+        + 4.1.1 Exercise 1
+        + 4.1.2 Exercise 2
+        + 4.1.3 Exercise 3
+        + 4.1.4 Exercise 4
+        
+5. Task 3: Research questions
+    + 5.1 Question #1 
+    + 5.2 Question #2 
+    + 5.3 Question #3 
+    + 5.4 Question #4 
+
+## 1 Introduction
+
+
+
+## 2 Install and Load Packages 
+### 2.1 Install **datateachr**
+
+```{r}
+## install.packages("devtools")
+## devtools::install_github("UBC-MDS/datateachr")
+
+```
+
+### 2.2 Load **datateachr** and **tidyverse**
+
+```{r}
+## Load dataset package - datateachr
+library(datateachr)
+
+## Load tidyverse - a collection of R packages 
+library(tidyverse) 
+```
+* Attached packages from tidyverse include:
+    + [x]ggplot2                  [x]purrr
+    + [x]tibble                   [x]dplyr
+    + [x]tidyr                    [x]stringr
+    + [x]readr                    [x]forcats
+* Conflicts from tidyverse include:
+    + \[x\]dplyr::filter()
+    + \[x\]dplyr::lag()
+
+## 3 Task 1: Choosing a dataset
+### 3.1 Choose 4 out of the 7 available datasets
+Within the **datateachr** package by Hayley Boyce and Jordan Bourak, there are 7 available datasets: 
+* *apt_buildings*
+* *building_permits*
+* *cancer_sample*
+* *flow_sample*
+* *parking_meters*
+* *steam_games*
+* *vancouver_trees*
+I have choosen 4 of the 7 datasets that interest me the most to explore further
+
+#### My 4 Choices:
+1. *vancouver_trees*
+2. *cancer_sample*
+3. *flow_sample*
+4. *steam_games*
+
+### 3.2 Explore the 4 datasets
+To narrow down the datasets and make a decision on which one to choose, I have explored each dataset using the *class*, *summary*, and *glimpse* functions
+
+* *Class* function: provides the class\(es\) the specified object called is from 
+* *Summary* function: provides a description for each column within the specified dataset 
+* *Glimpse* function: produces the observations and variables contained in the specified dataset, along with a brief look at the oultine of the dataset 
+
+#### 3.2.1 *vancouver_trees*
+Exploring the *vancouver_trees* dataset that is courtesy of The City of Vancouver's Open Data Portal. 
+
+```{r}
+## explore the *vancouver_trees* dataset using the class, summary, and glimpse functions
+class(vancouver_trees)
+summary(vancouver_trees)
+glimpse(vancouver_trees)
+```
+##### Attributes of the *vancouver_trees* dataset:
+* 146 611 rows 
+* 20 columns:
+    + Numeric columns (7)
+    + Character columns (12)
+    + Date column (1)
+* column **cultivar_name** contains NA values
+* classes:
+    + tbl_df
+    + tbl
+    + data.frame
+
+#### 3.2.2 *cancer_sample*
+Exploring the *cancer_sample* dataset that is courtesy of UCI Machine Learning Repository.
+
+```{r}
+## explore the *cancer_sample* dataset using the class, summary, and glimpse functions
+class(cancer_sample)
+summary(cancer_sample)
+glimpse(cancer_sample)
+```
+##### Attributes of the *cancer_sample* dataset:
+* 569 rows
+* 32 columns:
+    + Numeric columns (31)
+    + Character columns (1)
+* The dataset does not contain any NA values
+* classes: 
+    + spec_tbl_df
+    + tbl_df
+    + tbl
+    + data.frame
+
+#### 3.2.3 *flow_sample*
+Exploring the *flow_sample* dataset that is courtesy of The Government of Canada's Historical Hydrometric Database.
+
+```{r}
+## explore the *flow_sample* dataset using the class, summary, and glimpse functions
+class(flow_sample)
+summary(flow_sample)
+glimpse(flow_sample)
+```
+##### Attributes of the *flow_sample* dataset:
+* 218 rows
+* 7 columns:
+    + Numeric columns (4)
+    + Character columns (3)
+* columns **month**, **day**, **flow**, and **sym** contain NA values
+* classes:
+    + tbl_df
+    + tbl
+    + data.frame
+
+#### 3.2.4 *steam_games*
+Exploring the *steam_games* dataset that is courtesy of Kaggle.
+
+```{r}
+## explore the *steam_games* dataset using the class, summary, and glimpse functions
+class(steam_games)
+##summary(steam_games)
+##glimpse(steam_games)
+```
+##### Attributes of the *steam_games* dataset:
+* 40 833 rows
+* 21 columns:
+    + Numeric columns (4)
+    + Character columns (17)
+* columns **achievements**, **mature_content**, **original_price**, and **discount_price** contain NA values
+* classes:
+    + spec_tbl_df
+    + tbl_df
+    + tbl
+    + data.frame
+
+### 3.3 Narrowing it down to 2 datasets
+After a brief exploration of all 4 datasets, I have narrowed my decision down to 2 datasets:
+    1. *vancouver_trees*
+    2. *cancer_sample*
+
+**Why these datasets?** Both of these data sets contain the most numeric variables (*vancouver_trees* (7); *cancer_sample* (31)) out of all 4 datasets I have explored. This will allow me to have more freedom when exploring and graphing the data as there are more options for manipulating and displaying numeric data compared to character data (i.e. mathematical manipulations, distribution graphs, etc). As well, the high number of columns in both datasets allows for me to ask more in-depth, complex questions about the data and test different combinations of columns. Overall, both of these datasets contain a vast amount of information that gives me the opportunity to develop intriguing and thought provoking research questions that I will answer in Milestones 2 and 3 of this Mini Data Analysis Project. And it does not hurt that I am very passionate about hiking and the outdoors and am currently doing my Master's Thesis in a cancer biology lab, making both of these datasets very up my alley!     
+
+### 3.4 Final decision: choose a dataset
+In choosing my final dataset, I have formulated 1 research question for each dataset that I would be interested in exploring:
+
+1. *vancouver_trees*: How have the number of trees planted within each neighbourhood changed over time?
+
+2. *cancer_sample*: Does the radius of the sample impact the patient's diagnosis (Malignant(M) vs. Benign(B))? 
+
+**Final Decision: *vancouver_trees* **
+
+I have chosen the *vancouver_trees* dataset to work with throughout this Mini Data Analysis Project because I found it fitting seeing as I am currently living in Vancouver and love everything to do with the outdoors and exploring nature. Plus, I am currently surrounded by all things cancer for my masters, so exploring the *vancouver_trees* dataset will be a nice breath of fresh air :)
+
+## 4 Task 2: Exploring the dataset
+### 4.1 Diving deeper into the data
+To dive deeper and further explore the *vancouver_trees* dataset, I have completed 4 exercises. This will aid in my understanding of the dataset and help the development of more meaningful questions to be answered in future milestones.
+
+#### 4.1.1 Exercise 1
+Creating a density plot that contains a tree diameter distribution for the trees in the dataset 
+```{r}
+## Plotting the distribution of the diameter of the trees 
+
+ggplot(vancouver_trees, aes(diameter)) +
+  geom_histogram(bins = 50)
+```
+
+#### 4.1.2 Exercise 2
+Filtering observations in the *vancouver_trees* dataset to better explore the data I am interested in and help get a better idea of what parts of the data I am interested in.
+```{r}
+## Filtering the data using the dplyr filter function 
+ulmusGenus <- vancouver_trees %>%
+  filter(genus_name == "ULMUS")
+print(ulmusGenus)
+```
+
+#### 4.1.3 Exercise 3
+Using a ridge plot to look at the relationship between the diameter of the trees for each species within the Ulmus genus 
+**I will be using the filtered data, ulmusGenus, obtained from exercise 2 as the full *vancouver_trees* dataset is too large to plot the frequency of trees in all the genus' listed**
+```{r}
+ggplot(ulmusGenus, aes(diameter, species_name)) +
+  ggridges::geom_density_ridges(aes(fill = species_name))
+```
+
+#### 4.1.4 Exercise 4
+Utilizing boxplots to look at the frequency of tree diameters for each species within the Ulmus genus. 
+**I will be using the filtered data, ulmusGenus, obtained from exercise 2 as the full *vancouver_trees* dataset is too large to plot the frequency of trees in all the genus' listed**
+```{r}
+ggplot(ulmusGenus, aes(diameter, species_name)) +
+  geom_boxplot()
+```
+
+## 5 Task 3: Research questions
+Now that I have explored and become familiar with the *vancouver_trees* dataset, I am ready to generate my 4 research questions. 
+
+### 5.1 Question 1
+
+### 5.2 Question 2
+
+### 5.3 Question 3
+
+### 5.4 Question 4
