@@ -562,7 +562,6 @@ impossible to make meaningful observations about the data**
 ## call the dataset you wish to use and then specify which variables within that dataset you would like to graph
 ## chose to graph the categorical variable on the y axis to clean up the presentation of the data and prevent crowding 
 ggplot(ulmusGenus, aes(diameter, species_name)) +
-## chose to 
   ggridges::geom_density_ridges(aes(fill = species_name))
 ```
 
@@ -587,7 +586,9 @@ more easily (less crowded graphs) and from a new angle.
 vancouver_trees %>%
 ## group by species_name to group together the species in the dataset 
   group_by(species_name) %>%
-## use mutate to add the new variable species_diameter_mean by calculating the mean diameter of the trees  ## within each species and assigning the output to the new specified variable. This works because mutate   ## honors the group function.
+## use mutate to add the new variable species_diameter_mean by calculating the mean diameter of the trees
+## within each species and assigning the output to the new specified variable. This works because mutate
+## honors the group function.
   mutate(species_diameter_mean = mean(diameter))
 ```
 
@@ -619,7 +620,9 @@ vancouver_trees %>%
 vancouver_trees %>%
 ## group by genus_name to group together the genus' in the dataset 
   group_by(genus_name) %>%
-## use mutate to add the new variable genus_diameter_mean by calculating the mean diameter of the trees  ## within each genus and assigning the output to the new specified variable. This works because mutate   ## honors the group function.
+## use mutate to add the new variable genus_diameter_mean by calculating the mean diameter of the trees
+## within each genus and assigning the output to the new specified variable. This works because mutate
+## honors the group function.
   mutate(genus_diameter_mean = mean(diameter))
 ```
 
