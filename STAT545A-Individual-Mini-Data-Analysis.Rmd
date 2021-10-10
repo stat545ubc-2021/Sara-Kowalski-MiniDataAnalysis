@@ -46,7 +46,8 @@ Much of the inspiration for this script comes from [Heads or Tails](https://www.
 ### 2.1 Install **datateachr**
 
 ```{r}
-## The following code must be commented out in order to knit the rmd file. If necessary, unncomment the following code to install the packages. 
+## The following code must be commented out in order to knit the rmd file. If necessary, unncomment the
+## following code to install the packages. 
 ## install.packages("devtools")
 ## devtools::install_github("UBC-MDS/datateachr")
 
@@ -211,30 +212,52 @@ print(ulmusGenus)
 ```
 
 #### 4.1.3 Exercise 3
-Using a ridge plot to look at the relationship between the diameter of the trees for each species within the Ulmus genus 
+Using a ridge plot to look at the relationship between the diameter of the trees for each species within the Ulmus genus. I want to explore the relationship between two variables in the dataset so I have decided to look at the relationship between a categorical variable (species) and a numerical variable (diameter) to see how they relate. This way I can see the distribution of tree diameters within a species and determine if certain tree species within the Ulmus genus have larger diameters than others or if there is a large distribution of tree diameters within a species, etc.  
 
-**I will be using the filtered data, ulmusGenus, obtained from exercise 2 as the full *vancouver_trees* dataset is too large to plot the frequency of trees in all the genus' listed**
+**I will be using the filtered data, ulmusGenus, obtained from exercise 2 as the full *vancouver_trees* dataset is too large to plot the distribution graphs for the diameters of the trees for all the genus' listed. If I were to use the whole *vancouver_trees* dataset, the graph would be extremely long and very crowded, and it would be nearly impossible to make meaningful observations about the data**
 ```{r}
+## use ggplot to visualize the data
+## call the dataset you wish to use and then specify which variables within that dataset you would like to graph
+## chose to graph the categorical variable on the y axis to clean up the presentation of the data and prevent crowding 
 ggplot(ulmusGenus, aes(diameter, species_name)) +
+## chose to 
   ggridges::geom_density_ridges(aes(fill = species_name))
 ```
 
 #### 4.1.4 Exercise 4
-Utilizing boxplots to look at the frequency of tree diameters for each species within the Ulmus genus. 
-
-**I will be using the filtered data, ulmusGenus, obtained from exercise 2 as the full *vancouver_trees* dataset is too large to plot the frequency of tree diameters in all the genus' listed**
+I have chosen to create a new variable called species_diameter_mean which will hold the mean tree diameter for each species listed in the dataset. I could also create a new varibale called genus_diameter_mean which would hold the mean tree diameter for each genus in the dataset and give a more global or zoomed out view of the data. Creating these new variables will let me explore new relationships will other variables more easily (less crowded graphs) and from a new angle.
 ```{r}
-ggplot(ulmusGenus, aes(diameter, species_name)) +
-  geom_boxplot()
+## use the dplyr function mutate to create a new variable called species_diameter_mean in the
+## *vancouver_trees* dataset
+## call the dataset
+vancouver_trees %>%
+## group by species_name to group together the species in the dataset 
+  group_by(species_name) %>%
+## use mutate to add the new variable species_diameter_mean by calculating the mean diameter of the trees  ## within each species and assigning the output to the new specified variable. This works because mutate   ## honors the group function.
+  mutate(species_diameter_mean = mean(diameter))
+
+## use the dplyr function mutate to create a new variable called genus_diameter_mean in the
+## *vancouver_trees* dataset
+## call the dataset
+vancouver_trees %>%
+## group by genus_name to group together the genus' in the dataset 
+  group_by(genus_name) %>%
+## use mutate to add the new variable genus_diameter_mean by calculating the mean diameter of the trees  ## within each genus and assigning the output to the new specified variable. This works because mutate   ## honors the group function.
+  mutate(genus_diameter_mean = mean(diameter))
+
 ```
 
 ## 5  Task 3: Research questions
 Now that I have explored and become familiar with the *vancouver_trees* dataset, I am ready to generate my 4 research questions. 
 
 ### 5.1 Question 1
+What is the distribution for tree species (from a specified genus (e.g. Ulmus)) within Vancouver neighbourhoods? Are certain tree species favoured over others in specific neighbourhoods? 
 
 ### 5.2 Question 2
+How does the amount of trees planted change over time? Can go more in depth and look at how this changes within the different Vancouver neighbourhoods listed in the dataset. Or can look at how the number of trees planted changes for each genus or species over time. Can also look at a specific genus or species and see how the amount of trees planted changes over time within a specific neighbourhood or all the neighbourhoods in Vancouver.   
 
 ### 5.3 Question 3
+Within each genus, what is the distribution of the diameter of the trees for each species? Which species have a wider diameter distribution and which ones have a more narrow distribution?  
 
 ### 5.4 Question 4
+Which tree species are found planted on curbs? Does this vary by neighbourhood? Does the diameter of the tree determine whether it is planted on a curb (Y) or not (N) (i.e. large diameter trees would not be planted on curbs and smaller diameter trees would be)? Will have to group the trees by genus in order to pair down the dataset because for this question, it is too vast to look at in its entirety. 
