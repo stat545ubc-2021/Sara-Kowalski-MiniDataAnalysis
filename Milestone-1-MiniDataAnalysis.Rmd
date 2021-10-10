@@ -170,8 +170,8 @@ Attributes of the *steam_games* dataset:
 ### 3.3 Narrowing it down to 2 datasets
 After a brief exploration of all 4 datasets, I have narrowed my decision down to 2 datasets:
 
-    1.  *vancouver_trees*
-    2.  *cancer_sample*
+1.*vancouver_trees*     
+2.*cancer_sample*
 
 **Why these datasets?** Both of these data sets contain the most numeric variables (*vancouver_trees* (7); *cancer_sample* (31)) out of all 4 datasets I have explored. This will allow me to have more freedom when exploring and graphing the data as there are more options for manipulating and displaying numeric data compared to character data (i.e. mathematical manipulations, distribution graphs, etc). As well, the high number of columns in both datasets allows for me to ask more in-depth, complex questions about the data and test different combinations of columns. Overall, both of these datasets contain a vast amount of information that gives me the opportunity to develop intriguing and thought provoking research questions that I will answer in Milestones 2 and 3 of this Mini Data Analysis Project. And it does not hurt that I am very passionate about hiking and the outdoors and am currently doing my Master's Thesis in a cancer biology lab, making both of these datasets very up my alley!     
 

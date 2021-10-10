@@ -426,8 +426,8 @@ Attributes of the *steam_games* dataset:
 After a brief exploration of all 4 datasets, I have narrowed my decision
 down to 2 datasets:
 
-    1.  *vancouver_trees*
-    2.  *cancer_sample*
+1.*vancouver_trees*  
+2.*cancer_sample*
 
 **Why these datasets?** Both of these data sets contain the most numeric
 variables (*vancouver_trees* (7); *cancer_sample* (31)) out of all 4
