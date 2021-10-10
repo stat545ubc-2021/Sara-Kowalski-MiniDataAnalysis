@@ -456,7 +456,7 @@ each dataset that I would be interested in exploring:
 2.  *cancer_sample*: Does the radius of the sample impact the patient’s
     diagnosis (Malignant (M) vs. Benign (B))?
 
-**Final Decision: *vancouver_trees* **
+**Final Decision: *vancouver_trees***
 
 I have chosen the *vancouver_trees* dataset to work with throughout this
 Mini Data Analysis Project because I found it fitting seeing as I am
