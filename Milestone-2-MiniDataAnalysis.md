@@ -487,7 +487,7 @@ for question 4.3 within the [STAT545A worksheet
 # call the dataset 
 vancouver_trees %>% 
 ## filter for the specific tree genus' needed
-  filter(genus_name %in% c("ULMUS", "STYRAX", "PYRUS")) %>% 
+  filter(genus_name == c("ULMUS", "STYRAX", "PYRUS")) %>% 
 ## plot the data using ggplot
 ## x = diameter, y = genus_name
   ggplot(aes(diameter, genus_name)) +
@@ -502,7 +502,10 @@ vancouver_trees %>%
   scale_fill_discrete("")
 ```
 
-    ## Picking joint bandwidth of 1.73
+    ## Warning in genus_name == c("ULMUS", "STYRAX", "PYRUS"): longer object length is
+    ## not a multiple of shorter object length
+
+    ## Picking joint bandwidth of 2.01
 
 ![](Milestone-2-MiniDataAnalysis_files/figure-gfm/unnamed-chunk-9-1.png)<!-- -->
 
@@ -1408,8 +1411,10 @@ glimpse(untidy_ulmusGenus)
     ## $ `ELM SPECIES`      <chr> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…
     ## $ `CAMPERDOWN ELM`   <chr> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…
 
-Now I will tidy back the \*untidy_ulmusGenus dataset by using the
-pivot_longer function!
+Now I will tidy back the *untidy_ulmusGenus* dataset by using the
+pivot_longer function! (I am not going to tidy back the
+*untidy_vancouver_trees* dataset as it is very large and will
+unnecessarily take up space)
 
 ``` r
 tidy_ulmusGenus <- untidy_ulmusGenus %>% 
