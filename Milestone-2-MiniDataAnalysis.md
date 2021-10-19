@@ -1,7 +1,7 @@
-STAT545A Individual Mini Data Analysis - Milestone 2
+STAT545A Individual Mini Data Analysis-Milestone 2
 ================
 Sara Kowalski
-October 16, 2021
+October 19, 2021
 
 ## Table of Contents
 
@@ -14,17 +14,20 @@ October 16, 2021
 3.  Task 1: Process and summarize *vancouver_trees*
 
     -   3.1 My 4 research questions
-    -   3.2 Summarizing
-        -   3.2.1 Question 1  
+    -   3.2 Summarizing and graphing
+        -   3.2.1 Question 1
+            -   3.2.1.1 Summarizing
+            -   3.2.1.2 Graphing
         -   3.2.2 Question 2
+            -   3.2.2.1 Summarizing
+            -   3.2.2.2 Graphing
         -   3.2.3 Question 3
+            -   3.2.3.1 Summarizing
+            -   3.2.3.2 Graphing
         -   3.2.4 Question 4
-    -   3.3 Graphing
-        -   3.3.1 Question 1
-        -   3.3.2 Question 2
-        -   3.3.3 Question 3
-        -   3.3.4 Question 4
-    -   3.4 Reflect on results
+            -   3.2.4.1 Summarizing
+            -   3.2.4.2 Graphing
+    -   3.3 Reflect on results
 
 4.  Task 2: Tidy *vancouver_trees* dataset
 
@@ -77,8 +80,7 @@ library(tidyverse)
 
 -   Question 1: What is the distribution for tree species (from a
     specified genus (e.g. Ulmus)) within Vancouver neighbourhoods? Are
-    certain tree species favoured over others in specific
-    neighbourhoods?
+    certain tree species favored over others in specific neighbourhoods?
 
 -   Question 2: How does the amount of trees planted change over time?
     Can go more in depth and look at how this changes within the
@@ -101,13 +103,15 @@ library(tidyverse)
     dataset because for this question, it is too vast to look at in its
     entirety.
 
-### 3.2 Summarizing
+### 3.2 Summarizing and graphing
 
 To explore the *vancouver_trees* dataset more in depth, I will use
 various data manipulation techniques to help me complete a summarization
-activity for each research question listed above.
+and graphing activity for each research question listed above.
 
 #### 3.2.1 Question 1
+
+##### 3.2.1.1 Summarizing
 
 For this question it would be useful to know how many tree species there
 are for a given tree genus and how many Vancouver neighbourhoods there
@@ -172,7 +176,7 @@ row in the dataset is a tree, I can compute this using the function
 ``` r
 ## call the dataset
 vancouver_trees %>%
-## filter the data so it only contains trees with the genus Ulmus 
+## filter the data so it only contains trees with the genus ULMUS 
   filter(genus_name == "ULMUS") %>%
 ## use the count function and input the variable you want the disinct values for
   count(species_name)
@@ -189,8 +193,8 @@ vancouver_trees %>%
     ## 6 PUMILA           203
     ## 7 SPECIES           22
 
-Based on this futher analysis, I can see that the species *AMERICANA*
-has the most counts (2252) while *CARPINIFOLIA* has the least (17).
+Based on this further analysis, I can see that the species **AMERICANA**
+has the most counts (2252) while **CARPINIFOLIA** has the least (17).
 
 **In conclusion** : I have successfully determined the counts for the
 amount of neighbourhoods within the dataset and the number of species
@@ -202,7 +206,66 @@ want to group the neighbourhoods into quadrants (north, west, east, and
 south) and that way I can look at larger number of genus and species of
 trees within each quadrant instead of each neighbourhood.
 
+##### 3.2.1.2 Graphing
+
+To start answering this question, I am going to plot a bar graph that
+will look at the amount of trees for each species in the **STYRAX**
+genus. I am also going to colour the bar graph by neighbourhood so that
+it will become a stacked bar graph holding more information about where
+trees are located and how many species of each tree are loocated in each
+Vancouver neighbourhood. Further I am going to plot another bar graph
+with the neighbourhood as the x-axis and the colour of the bars as the
+species to compare and see which plot is cleaner and easier to
+interpret.
+
+``` r
+## define a new place to hold the data to be graphed and call the dataset to be used
+styraxGenus <- vancouver_trees %>%
+## filter that data so it only contains trees with the STYRAX genus
+  filter(genus_name == "STYRAX") %>%
+## group the data by species_name in order to get the number of trees in each species
+  group_by(species_name) %>%
+## use the mutate function to add a new column that contains the count of trees for each distinct species 
+## in the STYRAX genus
+  mutate(numTrees = n())
+
+## plot the data using ggplot, set x axis to species_name
+ggplot(styraxGenus, aes(species_name, fill = neighbourhood_name)) +
+## set the graph to a bar graph
+  geom_bar() +
+## define the x and y axis labels 
+  xlab("Species") +
+  ylab("Number of Trees")
+```
+
+![](Milestone-2-MiniDataAnalysis_files/figure-gfm/unnamed-chunk-4-1.png)<!-- -->
+
+``` r
+## plot the data using ggplot, set x axis to neighbourhood_name
+ggplot(styraxGenus, aes(neighbourhood_name, fill = species_name)) +
+## set the graph to a bar graph
+  geom_bar() +
+## define the x and y axis labels 
+  xlab("Neighbourhood") +
+  ylab("Number of Trees") +
+## declutter the bottom axis by switching x and y 
+  coord_flip()
+```
+
+![](Milestone-2-MiniDataAnalysis_files/figure-gfm/unnamed-chunk-4-2.png)<!-- -->
+
+**In conclusion** : I have successfully plotted the graphs to compare
+the amount of trees planted per species in the **STYRAX** genus within
+each vancouver neighbourhood in the dataset. I found that plotting the
+data with the neighbourhood on the y axis and the fill set to species
+that the data was a lot easier to interpret and looked much cleaner.
+This exercise has helped me to successfully answer my research question
+one. To take this analysis further, I could try adding a graph for each
+genus or for a select few genus’ by facet wrapping.
+
 #### 3.2.2 Question 2
+
+##### 3.2.2.1 Summarizing
 
 For this research question, instead of looking at how trees planted
 changes over time, I could look at how trees planted changes depending
@@ -314,7 +377,45 @@ it’s own group. This summarization exercise will help to graph the data
 when I explore the relationship between species of trees and the month
 they were planted in.
 
+##### 3.2.2.2 Graphing
+
+I am now able to graph this data using the new summarized variable
+*season* I just created. I have decided to graph a basic bar graph to
+look at the amount of **ULMUS** trees that have been planted in each
+neighbourhood throughout the 4 seasons.
+
+``` r
+## define a new place to hold the data to be graphed 
+ulmusGenus_season_planted <- season_van_trees_planted %>%
+## Filter to only trees with the ULMUS genus 
+  filter(genus_name == "ULMUS")
+
+## take the new filtered data set ulmusGenus_season_planted and input that into ggplot and use geom_bar
+## to create a bar graph with the x axis set to season 
+## this will plot the amount of Ulmus trees planted in each season 
+## set fill to neighbourhood_name 
+ggplot(ulmusGenus_season_planted, aes(season, fill = neighbourhood_name)) +
+  geom_bar(show.legend = FALSE) +
+  coord_flip() +
+  facet_wrap(~neighbourhood_name) +
+  theme_minimal()
+```
+
+![](Milestone-2-MiniDataAnalysis_files/figure-gfm/unnamed-chunk-7-1.png)<!-- -->
+
+**In conclusion** I have successfully created a bar graph to visualize
+the amount of **ULMUS** trees that have been planted in each
+neighbourhood per season. Since there are so many neighbourhoods in the
+dataset it makes it hard to visualize each individual graph I have
+created. Moving forward it would be wise to either narrow my question to
+specific neighbourhoods within the dataset or group the neighbourhoods
+into 1 of 4 quadrants (north, east, south, west) and look at the amount
+of **ULMUS** trees that have been planted in each quadrant of the city
+per season.
+
 #### 3.2.3 Question 3
+
+##### 3.2.3.1 Summarizing
 
 For this research question, it may be helpful to look at a handful of
 summary statistics for the diameter of the trees across the species of a
@@ -365,15 +466,66 @@ vancouver_trees %>%
 
 **In conclusion** I have successfully calculated summary statistics
 about the diameters of the trees within the species of the Ulmus genus.
-Based on the results, I can see that the species *AMERICANA* has the
+Based on the results, I can see that the species **AMERICANA** has the
 largest range of diameters with the minimum being 1.25 and the maximum
 being 144.00 and thus if I were to plot this data, I would predict that
-the *AMERICANA* species would have the widest distribution of tree
+the **AMERICANA** species would have the widest distribution of tree
 diameters. It would take more calculations to determine this with
 certainty, however, these initial calculations give me a good start at
 answering my original research question.
 
+##### 3.2.3.2 Graphing
+
+I am now going to complete a graphing exercise for this research
+question. I am going to look at the distribution of the diameter of the
+trees for each species within the **ULMUS**, **STYRAX**, and **PYRUS**
+genus. My code for this chunk of data was inspired by the code written
+for question 4.3 within the [STAT545A worksheet
+3](https://github.com/UBC-STAT/stat545.stat.ubc.ca/blob/master/content/worksheets/worksheet_a03.ipynb).
+
+``` r
+# call the dataset 
+vancouver_trees %>% 
+## filter for the specific tree genus' needed
+  filter(genus_name == c("ULMUS", "STYRAX", "PYRUS")) %>% 
+## plot the data using ggplot
+## x = diameter, y = genus_name
+  ggplot(aes(diameter, genus_name)) +
+## clean up the plot by using ggridges to look at the distribution of diameters in each species
+## set the fill of each ridge to be the species_name and set the alpha transparency to 1/3 so each 
+## ridge will be clearly visible
+  ggridges::geom_density_ridges(aes(fill = species_name), alpha = 1/3) +
+## rename the y axis to clean up the graph
+  ylab("Genus") +
+  theme_minimal() +
+## set the colour scheme 
+  scale_fill_discrete("")
+```
+
+    ## Warning in genus_name == c("ULMUS", "STYRAX", "PYRUS"): longer object length is
+    ## not a multiple of shorter object length
+
+    ## Picking joint bandwidth of 2.01
+
+![](Milestone-2-MiniDataAnalysis_files/figure-gfm/unnamed-chunk-9-1.png)<!-- -->
+
+**In conclusion** I have successfully created a ridges distribution
+graph to visualize the distribution of tree diameters across tree
+species of three different tree genus’. Although I did use alpha
+transparency to attempt to better see each distribution, in the future
+it would be useful to maybe facet the data by genus so that each graph
+can be seen on its own and hopefully be easier to read. This exercise
+does not do the best job at answering my original question as it is
+difficult to see the tree diameter distribution for each species and is
+only looking at three genus’ within the dataset whereas I would like to
+look at all the genus’. Given the size of the dataset, I may want to
+narrow down my research question to look at only a portion of the genus’
+given. That way my data analysis will be much cleaner and easier to
+interpret.
+
 #### 3.2.4 Question 4
+
+##### 3.2.4.1 Summarizing
 
 This research question would also benefit from the summarization
 exercise performed above for question 3. However, to look at this in a
@@ -384,7 +536,7 @@ will group the trees by whether (Y) or not (N) they have been planted on
 a curb. This will let me look at the types of diameters trees on curbs
 have vs. those not planted on curbs. For this exercise I will calculate
 the **range**, **mean**, **IQR**, and **standard deviation**. The trees
-will be filtered by genus, specifically looking at the *ACER* genus.
+will be filtered by genus, specifically looking at the **ACER** genus.
 
 ``` r
 ## call the dataset
@@ -411,10 +563,49 @@ vancouver_trees %>%
 
 **In conclusion** I have successfully calculated summary statistics
 about the diameters of the trees planted on curbs (Y) vs. those not
-planted on curbs (N) within the Acer genus. Based on the results, I can
-see that trees planted on curbs have a slightly lower average (mean)
+planted on curbs (N) within the **Acer** genus. Based on the results, I
+can see that trees planted on curbs have a slightly lower average (mean)
 tree diameter compared to those not planted on curbs. However, it is
 also evident that trees planted on curbs have a much larger range of
 tree diameters compared to those not planted on curbs. This is a good
 start to answering my full research question and could help me to subset
 my data for further analysis.
+
+##### 3.2.4.2 Graphing
+
+To begin answering part of my original research question, I am going to
+create a jitter plot that is going to look at just the species within
+the **ULMUS** genus and see if they have been planted on a curb or not.
+
+``` r
+## define a new place to hold the data to be graphed and call the dataset needed 
+ulmusGenus_curb_planted <- vancouver_trees %>%
+## filter for only trees with the genus ULMUS
+  filter(genus_name == "ULMUS")
+
+## use ggplot to graph the data
+## define the dataset being used
+## set x axis to species_name and y axis to curb
+ggplot(ulmusGenus_curb_planted, aes(species_name, curb)) +
+## specify the type of plot by using geom_jitter to create a jitter plot 
+## set alpha transparency to 1/10 
+  geom_jitter( alpha = 1/10) +
+## re-label the x axis to clean up the graph  
+  xlab("Species") +
+## set theme to visually customize the graph  
+  theme_light()
+```
+
+![](Milestone-2-MiniDataAnalysis_files/figure-gfm/unnamed-chunk-11-1.png)<!-- -->
+
+**In conclusion** I have successfully calculated created a jitter plot
+to visualize the amount of trees in each species of the **ULMUS** genus
+that have been planted on curbs (Y) or not (N). I made the analysis of
+the data easier by setting the alpha transparency to 1/10. Based on the
+results, I can see that the **AMERICANA** species has the most trees
+planted on curbs compared to the other species, with **GLABRA** having
+the second most, and **PUMILA** having the third most. To further
+sophisticate this graph and delve deeper into my analysis for this
+question, in the future I am going to try incorporating the
+neighbourhoods the trees have been planted in by maybe setting the
+colour of each point to equal a corresponding neighbourhood.
