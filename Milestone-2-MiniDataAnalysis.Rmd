@@ -227,7 +227,7 @@ I am now going to complete a graphing exercise for this research question. I am 
 # call the dataset 
 vancouver_trees %>% 
 ## filter for the specific tree genus' needed
-  filter(genus_name == c("ULMUS", "STYRAX", "PYRUS")) %>% 
+  filter(genus_name %in% c("ULMUS", "STYRAX", "PYRUS")) %>% 
 ## plot the data using ggplot
 ## x = diameter, y = genus_name
   ggplot(aes(diameter, genus_name)) +
@@ -239,10 +239,12 @@ vancouver_trees %>%
   ylab("Genus") +
   theme_minimal() +
 ## set the colour scheme 
-  scale_fill_discrete("")
+  scale_fill_discrete("") +
+## set x axis limits
+  xlim(-10, 75)
 ```
 
-**In conclusion** I have successfully created a ridges distribution graph to visualize the distribution of tree diameters across tree species of three different tree genus'. Although I did use alpha transparency to attempt to better see each distribution, in the future it would be useful to maybe facet the data by genus so that each graph can be seen on its own and hopefully be easier to read. This exercise does not do the best job at answering my original question as it is difficult to see the tree diameter distribution for each species and is only looking at three genus' within the dataset whereas I would like to look at all the genus'. Given the size of the dataset, I may want to narrow down my research question to look at only a portion of the genus' given. That way my data analysis will be much cleaner and easier to interpret. 
+**In conclusion** I have successfully created a ridges distribution graph to visualize the distribution of tree diameters across tree species of three different tree genus'. Although I did use alpha transparency to attempt to better see each distribution, in the future it would be useful to maybe facet the data by genus so that each graph can be seen on its own and hopefully be easier to read. This exercise does not do the best job at answering my original question as it is difficult to see the tree diameter distribution for each species and is only looking at three genus' within the dataset whereas I would like to look at all the genus'. Given the size of the dataset, I may want to narrow down my research question to look at only a portion of the genus' given. That way my data analysis will be much cleaner and easier to interpret.
 
 #### 3.2.4 Question 4
 ##### 3.2.4.1 Summarizing

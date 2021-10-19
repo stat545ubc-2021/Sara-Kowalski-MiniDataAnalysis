@@ -487,7 +487,7 @@ for question 4.3 within the [STAT545A worksheet
 # call the dataset 
 vancouver_trees %>% 
 ## filter for the specific tree genus' needed
-  filter(genus_name == c("ULMUS", "STYRAX", "PYRUS")) %>% 
+  filter(genus_name %in% c("ULMUS", "STYRAX", "PYRUS")) %>% 
 ## plot the data using ggplot
 ## x = diameter, y = genus_name
   ggplot(aes(diameter, genus_name)) +
@@ -499,13 +499,14 @@ vancouver_trees %>%
   ylab("Genus") +
   theme_minimal() +
 ## set the colour scheme 
-  scale_fill_discrete("")
+  scale_fill_discrete("") +
+## set x axis limits
+  xlim(-10, 75)
 ```
 
-    ## Warning in genus_name == c("ULMUS", "STYRAX", "PYRUS"): longer object length is
-    ## not a multiple of shorter object length
+    ## Picking joint bandwidth of 1.73
 
-    ## Picking joint bandwidth of 2.01
+    ## Warning: Removed 2 rows containing non-finite values (stat_density_ridges).
 
 ![](Milestone-2-MiniDataAnalysis_files/figure-gfm/unnamed-chunk-9-1.png)<!-- -->
 
