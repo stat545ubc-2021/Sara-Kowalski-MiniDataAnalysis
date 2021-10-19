@@ -285,4 +285,96 @@ ggplot(ulmusGenus_curb_planted, aes(species_name, curb)) +
 ```
 
 **In conclusion** I have successfully calculated created a jitter plot to visualize the amount of trees in each species of the **ULMUS** genus that have been planted on curbs (Y) or not (N). I made the analysis of the data easier by setting the alpha transparency to 1/10. Based on the results, I can see that the **AMERICANA** species has the most trees planted on curbs compared to the other species, with **GLABRA** having the second most, and **PUMILA** having the third most. To further sophisticate this graph and delve deeper into my analysis for this question, in the future I am going to try incorporating the neighbourhoods the trees have been planted in by maybe setting the colour of each point to equal a corresponding neighbourhood.  
- 
+
+### 3.3 Reflect on results
+Based on all the results from the summarizing and graphing exercises, I am a bit closer to answering my original research questions. Question 1 could essentially be answered with the work that I completed above (summarizing and graphing); however, I want to make the analysis more complex and look at graphing each tree genus. Question 2 is a bit more complicated and would likely require more data rearrangement and potentially looking at the city by quadrants instead of individual neighbourhoods. Question 3 is close to being answered, but I need to figure out a way to more cleanly/clearly display the ridge graphs and also include more genus types along with maybe finding a way to include some summary statistics on the graph such as the mean, max, and min values. Finally question 4 would also require a lot more data rearrangement in order to incorporate the neighbourhoods into the analysis. Out of all the questions so far, I think question 1 has yielded some of the most interesting results mainly because the graph is very easy to interpret and so patterns and distributions are much easier to comprehend.  
+
+## 4  Task 2: Tidy *vancouver_trees* dataset
+### 4.1 Is *vancouver_trees* tidy?
+It is important when you are setting up to answer any research question given a dataset that you determine whether your data is in tidy form or not. Looking through the *vancouver_trees* dataset, I have determined that the data is in **tidy form**. Each row is an observation, each column is a variable, and each cell holds a value. This can be demonstrated nicely by using the *genus_name* and *species_name* columns. Currently, within the dataset, the genus and species names of each tree is separated into 2 columns. This allows for tidy data as each cell is holding one value, a species name or a genus name. If however, the genus and species name were grouped together into the same column called *genus_species* the cells of this column would be holding two values which could make the analysis of the data more difficult depending on the question asked. Another easy example is the *civic_number* and *std_street* columns. These are currently separated and hold a number and a character value, respectively. In comparison, if this street data were to be grouped into one column, the number values from *civic_number* would no longer exist as they would have to be turned into character variables in order to squish the street data into one column that would hold the street address the tree is planted on. Again this could limit the analysis depending on the question asked.  
+```{r}
+## quick look at the dataset
+glimpse(vancouver_trees)
+```
+
+### 4.2 untidy, then tidy back *vancouver_trees*
+To see how the data would look if it were untidy and to get an understanding for how difficult some of the tasks would be if I were to use an untidy dataset to answer my research questions, I am going to untidy the *vancouver_trees* dataset by widening it. To do this I am going to pull out the data from the *common_name* column and make each distinct value its own column. This values for the new columns will be the genus and species names which will effectively remove the *genus_name* and *species_name* columns from the dataset. 
+
+```{r}
+## define the new dataset and call the dataset you are wanting to untidy
+untidy_vancouver_trees <- vancouver_trees %>%
+## use the pivot_wider function and specify which columns to remove/keep from the dataset
+## specify where the names for the new columns will come from and where the values for the new columns will
+## come from
+    pivot_wider(id_cols = c(-common_name, -species_name), 
+                names_from = common_name,
+                values_from = species_name)
+glimpse(untidy_vancouver_trees)
+```
+
+At first glance this new untidy dataset is very, very messy and large now. This would be extremely hard to work with when answering the research questions I have posed. Given the large amount of data within this dataset, I will also demonstrate untidying the data using a subset of the original dataset that only looks at the **ULMUS** genus
+
+```{r}
+## define the new subest of data and the dataset being used to create it 
+untidy_ulmusGenus <- vancouver_trees %>%
+  filter(genus_name == "ULMUS") %>%
+## use the pivot function and specify which columns to remove/keep from the dataset
+## specify where the names for the new columns will come from and where the values for the new columns will
+## come from
+  pivot_wider(id_cols = c(-common_name, -species_name), 
+              names_from = common_name, 
+              values_from = species_name)
+glimpse(untidy_ulmusGenus)
+```
+
+Now I will tidy back the *untidy_ulmusGenus* dataset by using the pivot_longer function! (I am not going to tidy back the *untidy_vancouver_trees* dataset as it is very large and will unnecessarily take up space)
+
+```{r}
+tidy_ulmusGenus <- untidy_ulmusGenus %>% 
+  pivot_longer(cols = -c(tree_id:latitude), 
+               names_to  = "common_name", 
+               values_to = "species_name")
+glimpse(tidy_ulmusGenus)
+```
+
+### 4.3 Choose 2 research questions
+Based on the analysis conducted in this Milestone, I have decided to pursue questions 1 and 3 in the future Milestone 3 activities. 
+
+* Question 1:
+What is the distribution for tree species (from a specified genus (e.g. Ulmus)) within Vancouver neighbourhoods? Are certain tree species favored over others in specific neighbourhoods? 
+
+* Question 3:
+Within each genus, what is the distribution of the diameter of the trees for each species? Which species have a wider diameter distribution and which ones have a more narrow distribution?  
+
+I have chosen these two questions because **(a)** since I have moved to Vancouver, I have lived in several different areas (Kitsilano, Mount Pleasant, Point Grey, Kerrisdale, etc), and I thought it would be interesting to see the distribution of trees throughout the neighbourhoods I have lived in (Question 1). **(b)** I think it would be interesting to see how the diameter varies between the genus of trees and between the species of trees within a genus (Question 3) and based on the preliminary graphing I did for this question, I think it would be cool to try and display this data with a ridge plot. Finally, **(c)** I will likely be using different functions to manipulate and plot the data in order to formulate the answers to either question which will allow me to gain experience with multiple different functions within *dyplr* and *tidyverse*.  
+
+### 4.4. Choose a version of *vancouver_trees*
+To make the analysis of questions 1 and 3 easier, I am now going to rearrange the *vancouver_trees* dataset into a version I feel will be more appropriate to work with. 
+
+```{r}
+## give a name to the new version and call the dataset you are going to be rearranging
+vancouver_trees_milestone3 <- vancouver_trees %>%
+## keep only the columns need for the analysis of questions 1 and 3 with the select function
+  select(genus_name, species_name, neighbourhood_name, diameter)
+## this will be the main dataset, I will now split it into two datasets that will be tailored to answering
+## questions 1 and 3
+
+## dataset for question 1
+## give a name to the new version and call the dataset you are going to rearrange
+vancouver_trees_milestone3_q1 <- vancouver_trees_milestone3 %>%
+## filter for the desired neighbourhoods
+  filter(neighbourhood_name %in% c("MOUNT PLEASANT", "OAKRIDGE", "KITSILANO", "KERRISDALE", "WEST POINT GREY")) %>%
+## group by genus since I want to look at each species within each genus  
+  group_by(genus_name) %>%
+## then use summarize and n_distinct to count the number of distinct species within each genus. 
+  mutate(n_species = n_distinct(species_name))
+
+## dataset for question 3
+## give a name to the new version and call the dataset you are going to rearrange
+vancouver_trees_milestone3_q3 <- vancouver_trees_milestone3 %>%
+## group by genus and species
+  group_by(genus_name, species_name) %>%
+## add summary statistics that may be useful for graphing 
+  mutate(avg_treeDiameter = mean(diameter), median_treeDiameter = median(diameter), sd_treeDiameter = sd(diameter), max_treeDiameter = max(diameter), min_treeDiameter = min(diameter))
+```
+  
