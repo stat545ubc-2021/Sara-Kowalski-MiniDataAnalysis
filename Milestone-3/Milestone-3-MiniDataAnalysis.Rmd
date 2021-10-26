@@ -14,28 +14,13 @@ output: github_document
     + 2.1 Load **datateachr** and **tidyverse**
     + 2.2 My research questions
     
-3. Task 1: Process and summarize *vancouver_trees*
-    + 3.1 My 4 research questions
-    + 3.2 Summarizing and graphing 
-        + 3.2.1 Question 1
-            + 3.2.1.1 Summarizing
-            + 3.2.1.2 Graphing
-        + 3.2.2 Question 2
-            + 3.2.2.1 Summarizing
-            + 3.2.2.2 Graphing
-        + 3.2.3 Question 3
-            + 3.2.3.1 Summarizing
-            + 3.2.3.2 Graphing
-        + 3.2.4 Question 4
-            + 3.2.4.1 Summarizing
-            + 3.2.4.2 Graphing
-    + 3.3 Reflect on results 
-    
-4. Task 2: Tidy *vancouver_trees* dataset
-    + 4.1 Is *vancouver_trees* tidy? 
-    + 4.2 untidy, then tidy back *vancouver_trees*
-    + 4.3 Choose 2 research questions
-    + 4.4. Choose a version of *vancouver_trees*
+3. Task 1: Special data types
+    + 3.1 Reordering factors 
+    + 3.2 Modifying time 
+
+4. Task 2: Modelling
+    + 4.1 Research question and variable of interest
+    + 4.2 
 
 
 ## 1  Introduction
@@ -61,3 +46,5 @@ What is the distribution for tree species (from a specified genus (e.g. Ulmus)) 
 
 2. Question 2:
 Within each genus, what is the distribution of the diameter of the trees for each species? Which species have a wider diameter distribution and which ones have a more narrow distribution?
+
+## 3 
