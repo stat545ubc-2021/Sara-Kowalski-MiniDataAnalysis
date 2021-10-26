@@ -3,6 +3,7 @@
 Hello! This folder contains all of the work completed for milestone 3 of the individual mini data analysis project. 
 
 ### Goals
+For milestone 3, there were three main goals 
 
 
 ### Files

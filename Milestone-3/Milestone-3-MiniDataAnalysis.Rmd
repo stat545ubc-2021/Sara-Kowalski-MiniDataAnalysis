@@ -20,7 +20,12 @@ output: github_document
 
 4. Task 2: Modelling
     + 4.1 Research question and variable of interest
-    + 4.2 
+    + 4.2 Hypothesis testing
+        + 4.2.1 P-value 
+
+5. Task 3: Reading and writing data
+    + 5.1 Write a csv file
+    + 5.2 Write a R binary file
 
 
 ## 1  Introduction
@@ -47,4 +52,7 @@ What is the distribution for tree species (from a specified genus (e.g. Ulmus)) 
 2. Question 2:
 Within each genus, what is the distribution of the diameter of the trees for each species? Which species have a wider diameter distribution and which ones have a more narrow distribution?
 
-## 3 
+## 3  Task 1: Special data types
+### 3.1 Reordering factors
+
+For this task I have decided to take a plot I produced in milestone 2 which involved plotting across the three groups: *neighbourhood_name*, *number of trees*, and *species_name*, and produce a new plot with the neighbourhoods reordered in ascending order (i.e. the neighbourhood with the least amount of trees on the far left with it increasing up to the neighbourhood with the most amount of trees on the far right). I will complete this task using the tools in the **forcats** package which was designed for working with and reordering factors. 
