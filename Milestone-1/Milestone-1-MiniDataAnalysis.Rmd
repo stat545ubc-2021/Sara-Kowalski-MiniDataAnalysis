@@ -1,5 +1,5 @@
 ---
-title: "STAT545A Individual Mini Data Analysis"
+title: "STAT545A Individual Mini Data Analysis-Milestone 1"
 author: "Sara Kowalski"
 date: "October 9, 2021"
 output: github_document
