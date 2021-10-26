@@ -4,9 +4,9 @@ Hello! This folder contains all of the work completed for milestone 2 of the ind
 
 ### Goals
 There were 3 main goals for the successful completion of milestone 2:
-1. Further explore the data and specifically the research questions generated in milestone 1 by completing 1 summarization and 1 graphing activity for each research question 
+1. Further explore the data and specifically the research questions generated in milestone 1 by completing 1 summarization and 1 graphing activity for each research question. 
 2. Determine the state of your data: tidy vs. untidy.
-3. Narrow the research questions down to 2 which will be explored in milestone 3
+3. Narrow the research questions down to 2 which will be explored in milestone 3.
 
 ### Files
 

@@ -4,8 +4,8 @@ Hello! This folder contains all of the work completed for milestone 1 of the ind
 
 ### Goals
 There were 3 main goals for the successful completion of milestone 1:
-1. Pick a dataset from a list of 7 that interests you the most  
-2. Explore the chosen dataset by manipulating and visualizing the data contained within the dataset
+1. Pick a dataset from a list of 7 that interests you the most . 
+2. Explore the chosen dataset by manipulating and visualizing the data contained within the dataset.
 3. Formulate 4 research questions about the chosen dataset that will be answered in future milestones.
 
 ### Files

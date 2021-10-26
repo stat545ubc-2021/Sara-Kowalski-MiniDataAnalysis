@@ -56,3 +56,35 @@ Within each genus, what is the distribution of the diameter of the trees for eac
 ### 3.1 Reordering factors
 
 For this task I have decided to take a plot I produced in milestone 2 which involved plotting across the three groups: *neighbourhood_name*, *number of trees*, and *species_name*, and produce a new plot with the neighbourhoods reordered in ascending order (i.e. the neighbourhood with the least amount of trees on the far left with it increasing up to the neighbourhood with the most amount of trees on the far right). I will complete this task using the tools in the **forcats** package which was designed for working with and reordering factors. 
+
+Here is the code and a visual of the original plot I created in Milestone 2 which looked at how many trees in the **STYRAX** genus were planted in each Vancouver neighbourhood. The graph was further subsetted to show how many of the different types of **STYRAX** species were planted in each neighbourhood by colouring the bars based on the *species_name*.  
+
+```{r}
+## define a new place to hold the data to be graphed and call the dataset to be used
+styraxGenus <- vancouver_trees %>%
+## filter that data so it only contains trees with the STYRAX genus
+  filter(genus_name == "STYRAX") %>%
+## group the data by species_name in order to get the number of trees in each species
+  group_by(species_name) %>%
+## use the mutate function to add a new column that contains the count of trees for each distinct species 
+## in the STYRAX genus
+  mutate(numTrees = n())
+
+## plot the data using ggplot, set x axis to neighbourhood_name
+ggplot(styraxGenus, aes(neighbourhood_name, fill = species_name)) +
+## set the graph to a bar graph
+  geom_bar() +
+## define the x and y axis labels 
+  xlab("Neighbourhood") +
+  ylab("Number of Trees") +
+## declutter the bottom axis by switching x and y 
+  coord_flip()
+```
+
+To more clearly see how the number of trees planted changes in each neighbourhood, I am going to reorder the neighbourhoodds so they appear in ascending order from left to right based on the number of **STYRAX** trees planted. 
+
+```{r}
+
+
+
+```

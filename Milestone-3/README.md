@@ -3,7 +3,10 @@
 Hello! This folder contains all of the work completed for milestone 3 of the individual mini data analysis project. 
 
 ### Goals
-For milestone 3, there were three main goals 
+There were 3 main goals for the successful completion of milestone 3:
+1. Learn how to work with special data types by completing two activities involving reordering factors and modifying time (date) data. 
+2. Practice fitting a model or running hypothesis tests on a variable of interest within the data relevant to one of your chosen research questions. 
+3. Get familiar with reading and writing data by writing a csv and RDS file. 
 
 
 ### Files
