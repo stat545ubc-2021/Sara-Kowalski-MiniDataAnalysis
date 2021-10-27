@@ -29,7 +29,7 @@ output: github_document
 
 
 ## 1  Introduction
-Hello! The following document contains the work required to complete Milestone 3 of the Mini Data Analysis Project in STAT545A.  
+Hello! The following document contains the work required to complete Milestone 3 of the Mini Data Analysis Project in STAT545A. Here I will be using R, and more specifically the tidyverse packages within R, to explore special data types, like reordering factors and modifying time data, model data and perform hypothesis testing, and read and write csv and RDS files. I will be using the *vancouver_trees* dataset to complete the tasks outlined in this milestone and more specifically, where appropriate, I will be completing these tasks in relation to the two research questions I chose at the end of milestone 2.    
 
 Much of the inspiration for this script comes from [Heads or Tails](https://www.kaggle.com/headsortails/tidy-titarnic) and from the [instructions](https://stat545.stat.ubc.ca/mini-project/mini-project-3/) provided for the project.
 
@@ -75,7 +75,6 @@ ggplot(styraxGenus, aes(neighbourhood_name, fill = species_name)) +
 ## declutter the bottom axis by switching x and y 
   coord_flip()
 ```
-
 To more clearly see how the number of trees planted changes by neighbourhood, I am going to reorder the neighbourhoodds so they appear in ascending order from left to right based on the number of **STYRAX** trees planted. I can achieve this by using the **forcats** function *fct_infreq()* which reorders a factor (neighbourhood) by its number of values (trees planted).   
 
 ```{r}
@@ -98,5 +97,18 @@ ggplot(styraxGenus, aes(neighbourhood_name, fill = species_name)) +
   coord_flip() 
 
 ```
-
 By reordering the neighbourhood_name variable in ascending order based on the number of trees planted, you can more clearly see which neighbourhoods have a high number of **STYRAX** trees planted and which have low numbers. Further, you can actually distinguish and be confident as to which neighbourhood has the most **STYRAX** trees (Kitsilano) and which neighbourdhood has the least (West End); whereas, before reordering, it was very difficult to be certain since Shauhnessy and Kitsilano are very close in number of trees as are West End and Strathcona. Finally, by reordering the data like this, if there is a trend for a certain area or quadrant of the city to have more **STYRAX** trees, then it would become more apparent and could lead to more research questions. 
+
+### 3.2 Modifying time
+In the dataset *vancouver_trees* there is a date column which holds the date of when a tree was planted. For this exercise of modifying a time-based column, I am going to use the **format()** function from the **lubridate** package to modify the *date_planted* column by extracting only the year the tree was planted. 
+
+```{r}
+## define the new data subset and call the dataset to be modified 
+van_trees_year_planted <- vancouver_trees %>%
+## use the format function within the mutate function to modify the existing date_planted column 
+## and extract only the year
+  mutate(date_planted = format(date_planted, format = "%Y"))
+## visualize the new dataset
+glimpse(van_trees_year_planted)
+```
+Modifying the time data to only hold the year the tree was planted might allow for interesting research questions such as investigating which year had the most trees planted or looking to see if there are specific years where certain types of trees were preferentially planted over others, etc. Further, it may be interesting to see if there is a relationship between the year the tree was planted and its diameter (i.e do older trees have larger diameters? Is the diameter of a tree influenced by how old it is?)
