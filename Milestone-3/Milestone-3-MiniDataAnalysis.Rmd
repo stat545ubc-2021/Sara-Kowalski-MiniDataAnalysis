@@ -162,8 +162,21 @@ For the final task in milestone 3, we are asked to write a csv and RDS file whic
 
 ### 5.1 Write a csv file
 
-For the csv file writing part of the task, I will take a summary table I wrote in milestone 2 (*styraxGenus*) and use the **write_csv()** and **here::here()** function to write the table as a csv file into my output folder.
+For the csv file writing part of the task, I will take a summary table I wrote in milestone 2 and use the **write_csv()** and **here::here()** function to write the table as a csv file into my output folder.
 
+The summary table I have chosen to use for this task holds data from the *vancouver_trees* dataset that has been filtered to only the **ULMUS** genus and then further counted for the amount of trees each species within the **ULMUS** genus has. When I made this table in milestone 2, I did not save it as a new dataset. Therefore, I will re-run that code here and call that new dataset *ulmusGenus_numSpecies_trees*. 
+
+```{r}
+## call the dataset and give a name to the new dataset where the subsetted data will be held
+ulmusGenus_numSpecies_trees <- vancouver_trees %>%
+## filter the data so it only contains trees with the genus ULMUS 
+  filter(genus_name == "ULMUS") %>%
+## use the count function and input the variable you want the distinct values for
+  count(species_name)
+## look at the new dataset
+summary(ulmusGenus_numSpecies_trees)
+```
+Now I can use this summary table and write it into a csv file to be stored in the output folder. 
 ```{r}
 ## use write_csv to write the summary table into a csv file and use the here::here function to
 ## put it in the output folder 
