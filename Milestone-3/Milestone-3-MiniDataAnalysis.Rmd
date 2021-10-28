@@ -161,3 +161,13 @@ Although both options show the P value (tidy produces a P value of 0; summary pr
 For the final task in milestone 3, we are asked to write a csv and RDS file which will both be saved in the **output** folder within my repository. 
 
 ### 5.1 Write a csv file
+
+For the csv file writing part of the task, I will take a summary table I wrote in milestone 2 (*season_van_trees_planted*) and use the **write_csv()** and **here::here()** function to write the table as a csv file into my output folder.
+
+```{r}
+## use write_csv to write the summary table into a csv file and use the here::here function to
+## put it in the output folder 
+## specify the data set to be written into a csv - season_van_trees_planted
+## name the new csv file - exported_season_van_trees_planted
+write_csv(season_van_trees_planted, here::here("output", "export_season_van_trees_planted "))
+```
