@@ -29,6 +29,7 @@ output: github_document
 
 
 ## 1  Introduction
+
 Hello! The following document contains the work required to complete Milestone 3 of the Mini Data Analysis Project in STAT545A. Here I will be using R, and more specifically the tidyverse packages within R, to explore special data types, like reordering factors and modifying time data, model data and perform hypothesis testing, and read and write csv and RDS files. I will be using the *vancouver_trees* dataset to complete the tasks outlined in this milestone and more specifically, where appropriate, I will be completing these tasks in relation to the two research questions I chose at the end of milestone 2.    
 
 Much of the inspiration for this script comes from [Heads or Tails](https://www.kaggle.com/headsortails/tidy-titarnic) and from the [instructions](https://stat545.stat.ubc.ca/mini-project/mini-project-3/) provided for the project.
@@ -44,7 +45,7 @@ library(datateachr)
 library(tidyverse) 
 ```
 
-### 2.2 My Research Questions
+### 2.2 My research questions
 
 1. Question 1:
 What is the distribution for tree species (from a specified genus (e.g. Ulmus)) within Vancouver neighbourhoods? Are certain tree species favored over others in specific neighbourhoods? 
@@ -75,6 +76,7 @@ ggplot(styraxGenus, aes(neighbourhood_name, fill = species_name)) +
 ## declutter the bottom axis by switching x and y 
   coord_flip()
 ```
+
 To more clearly see how the number of trees planted changes by neighbourhood, I am going to reorder the neighbourhoodds so they appear in ascending order from left to right based on the number of **STYRAX** trees planted. I can achieve this by using the **forcats** function *fct_infreq()* which reorders a factor (neighbourhood) by its number of values (trees planted).   
 
 ```{r}
@@ -97,6 +99,7 @@ ggplot(styraxGenus, aes(neighbourhood_name, fill = species_name)) +
   coord_flip() 
 
 ```
+
 By reordering the neighbourhood_name variable in ascending order based on the number of trees planted, you can more clearly see which neighbourhoods have a high number of **STYRAX** trees planted and which have low numbers. Further, you can actually distinguish and be confident as to which neighbourhood has the most **STYRAX** trees (Kitsilano) and which neighbourdhood has the least (West End); whereas, before reordering, it was very difficult to be certain since Shauhnessy and Kitsilano are very close in number of trees as are West End and Strathcona. Finally, by reordering the data like this, if there is a trend for a certain area or quadrant of the city to have more **STYRAX** trees, then it would become more apparent and could lead to more research questions. 
 
 ### 3.2 Modifying time
@@ -111,7 +114,8 @@ van_trees_year_planted <- vancouver_trees %>%
 ## visualize the new dataset
 glimpse(van_trees_year_planted)
 ```
-Modifying the time data to only hold the year the tree was planted might allow for interesting research questions such as investigating which year had the most trees planted or looking to see if there are specific years where certain types of trees were preferentially planted over others, etc. Further, it may be interesting to see if there is a relationship between the year the tree was planted and its diameter (i.e do older trees have larger diameters? Is the diameter of a tree influenced by how old it is?)
+
+Modifying the time data to only hold the year the tree was planted might allow for interesting research questions such as investigating which year had the most trees planted or looking to see if there are specific years where certain types of trees were preferentially planted over others, etc. Further, it may be interesting to see if there is a relationship between the year the tree was planted and its diameter (i.e do older trees have larger diameters? Is the diameter of a tree influenced by how old it is?).
 
 ## 4  Task 2: Modelling
 ### 4.1 Research question and variable of interest
@@ -150,6 +154,7 @@ print(tidy_aov_van_trees)
 ## use the summary to show an alternative way of accessing the P value
 summary(aov_van_trees)
 ```
+
 **For the tidy function approach, the P value is located under the p.value column, and for the summary function approach, the P value is located under the Pr(>F) column in the genus row.** 
 
 Although both options show the P value (tidy produces a P value of 0; summary produces a P value of <2e-16), I would prefer to use the summary function to obtain the P value as not only does it give the exact calculated number, it also produces three stars (***) next to the P value to denote how significant the result is. 
@@ -176,7 +181,9 @@ ulmusGenus_numSpecies_trees <- vancouver_trees %>%
 ## look at the new dataset
 summary(ulmusGenus_numSpecies_trees)
 ```
+
 Now I can use this summary table and write it into a csv file to be stored in the output folder. 
+
 ```{r}
 ## use write_csv to write the summary table into a csv file and use the here::here function to
 ## put it in the output folder 
@@ -185,3 +192,4 @@ Now I can use this summary table and write it into a csv file to be stored in th
 write_csv(ulmusGenus_numSpecies_trees, here::here("output", "exported_ulmusGenus_numSpecies_trees.csv"))
 ```
 
+### 5.2 Write a R binary file
