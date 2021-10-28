@@ -180,7 +180,7 @@ Now I can use this summary table and write it into a csv file to be stored in th
 ```{r}
 ## use write_csv to write the summary table into a csv file and use the here::here function to
 ## put it in the output folder 
-## specify the data set to be written into a csv - styraxGenus
-## name the new csv file - exported_styraxGenus.csv
-write_csv(styraxGenus, here::here("output", "exported_styraxGenus.csv"))
+## specify the data set to be written into a csv - ulmusGenus_numSpecies_trees
+## name the new csv file - exported_ulmusGenus_numSpecies_trees.csv
+write_csv(ulmusGenus_numSpecies_trees, here::here("output", "exported_ulmusGenus_numSpecies_trees.csv"))
 ```
