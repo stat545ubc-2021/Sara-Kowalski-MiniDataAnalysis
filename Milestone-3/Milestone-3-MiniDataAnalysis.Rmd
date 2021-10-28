@@ -184,3 +184,4 @@ Now I can use this summary table and write it into a csv file to be stored in th
 ## name the new csv file - exported_ulmusGenus_numSpecies_trees.csv
 write_csv(ulmusGenus_numSpecies_trees, here::here("output", "exported_ulmusGenus_numSpecies_trees.csv"))
 ```
+

@@ -23,3 +23,4 @@ Here is a list of the files and their contents contained within this repository.
 | Milestone-1                         | contains the md, Rmd, and plots files for milestone 1             |
 | Milestone-2                         | contains the md, Rmd, and plots files for milestone 2             |
 | Milestone-3                         | contains the md, Rmd, and plots files for milestone 3             |
+| output                              | contains the csv and RDS file written for milestone 3             |
