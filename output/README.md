@@ -8,3 +8,4 @@ Hello! This folder contains the csv and RDS files written to complete task 3 of 
 | ------------------------------------|------------------------------------------------------------------ |
 | README.md                           | contains a description of the Milestone 1 folder and files present|
 | exported_ulmusGenus_numSpecies_trees.csv | contains the csv written file from task 3                    |
+| aov_van_trees.RDS                   | contains the anova results from task 2 in RDS file format         |

@@ -350,3 +350,28 @@ write_csv(ulmusGenus_numSpecies_trees, here::here("output", "exported_ulmusGenus
 ```
 
 ### 5.2 Write a R binary file
+
+For the RDS file writing part of the task, I will take the anova
+hypothesis test data I produced in task 2 of this milestone and use the
+**saveRDS()** and **here::here()** function to write it as an RDS file
+into my output folder. Following that, I will use the **readRDS()**
+function to read the file back into r.
+
+``` r
+## create an RDS file and put it in the output folder using the saveRDS function
+saveRDS(aov_van_trees, here::here("output", "aov_van_trees.RDS"))
+
+## read in the created RDS file to r using the readRDS function
+readRDS("aov_van_trees.RDS")
+```
+
+    ## Call:
+    ##    aov(formula = diameter ~ genus_name, data = vancouver_trees)
+    ## 
+    ## Terms:
+    ##                 genus_name Residuals
+    ## Sum of Squares     2758757   9679647
+    ## Deg. of Freedom         96    146514
+    ## 
+    ## Residual standard error: 8.128122
+    ## Estimated effects may be unbalanced
