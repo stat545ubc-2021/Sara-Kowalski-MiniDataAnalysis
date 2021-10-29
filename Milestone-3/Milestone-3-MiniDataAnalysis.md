@@ -362,7 +362,7 @@ function to read the file back into r.
 saveRDS(aov_van_trees, here::here("output", "aov_van_trees.RDS"))
 
 ## read in the created RDS file to r using the readRDS function
-readRDS("aov_van_trees.RDS")
+readRDS(here::here("output", "aov_van_trees.RDS"))
 ```
 
     ## Call:

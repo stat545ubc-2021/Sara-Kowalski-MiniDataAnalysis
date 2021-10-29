@@ -1,4 +1,4 @@
-STAT545A Individual Mini Data Analysis
+STAT545A Individual Mini Data Analysis-Milestone 1
 ================
 Sara Kowalski
 October 9, 2021

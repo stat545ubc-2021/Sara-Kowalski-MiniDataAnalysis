@@ -6,8 +6,8 @@ Hello! Welcome to my mini data analysis project for STAT545A! This repository co
 
 ### Milesones
 - [x] 1
-- [x]  2
-- [x]  3
+- [x] 2
+- [x] 3
 
 ### Project Goals 
 The overarching goal of this project is to conduct a mini data analysis on the dataset of our choosing using the tools we have learned in class. Specifically we will be exploring a dataset within R studio and using the tidyverse package to manipulate and visualize our data and then prepare it for presentation. For my project, I have chosen to explore the *vancouver_trees* dataset which contains an abundance of data on the types of trees planted within the different neighbourhoods of the City of Vancouver. There are 3 milestones that must be completed for this project, each with their own distinct goals which are outlined in the specific README found in each milestone folder. 

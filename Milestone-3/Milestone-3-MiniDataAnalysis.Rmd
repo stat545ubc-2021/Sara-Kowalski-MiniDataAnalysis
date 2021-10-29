@@ -201,5 +201,5 @@ For the RDS file writing part of the task, I will take the anova hypothesis test
 saveRDS(aov_van_trees, here::here("output", "aov_van_trees.RDS"))
 
 ## read in the created RDS file to r using the readRDS function
-readRDS("aov_van_trees.RDS")
+readRDS(here::here("output", "aov_van_trees.RDS"))
 ```

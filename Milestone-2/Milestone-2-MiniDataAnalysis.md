@@ -178,7 +178,7 @@ row in the dataset is a tree, I can compute this using the function
 vancouver_trees %>%
 ## filter the data so it only contains trees with the genus ULMUS 
   filter(genus_name == "ULMUS") %>%
-## use the count function and input the variable you want the disinct values for
+## use the count function and input the variable you want the distinct values for
   count(species_name)
 ```
 
