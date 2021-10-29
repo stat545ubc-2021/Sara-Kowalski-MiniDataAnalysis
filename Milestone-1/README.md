@@ -1,6 +1,6 @@
 # Milestone 1 
 
-Hello! This folder contains all of the work completed for milestone 1 of the individual mini data analysis project. 
+This folder contains all of the work completed for milestone 1 of the individual mini data analysis project. 
 
 ### Goals
 There were 3 main goals for the successful completion of milestone 1:
